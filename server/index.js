@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -18,19 +17,14 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.error("MongoDB error:", err));
 
-// API route example
+// API route
 app.get("/api/test", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-// Serve React build
-const __dirname = path.resolve();
-// Serve static files
-app.use(express.static(path.join(__dirname, "client/build")));
-
-// Catch-all (React Router)
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+// ✅ simple root route
+app.get("/", (req, res) => {
+  res.send("API is running...");
 });
 
 // Start server

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "https://homecare-ngx8.onrender.com";
+// ✅ SheetBest API
+const API_URL = "https://api.sheetbest.com/sheets/c0d7ae33-b786-47d8-9eca-f995601d32bf";
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -31,106 +32,63 @@ function Reviews() {
     }
   ];
 
-  // ✅ Fetch reviews
+  // ✅ FETCH from Google Sheet
   useEffect(() => {
-    axios.get(`${API_URL}/reviews`)
-      .then(res => setReviews(res.data))
-      .catch(err => console.error("Fetch error:", err));
+    fetchReviews();
+
+    // 🔄 Auto refresh every 5 sec
+    const interval = setInterval(fetchReviews, 5000);
+    return () => clearInterval(interval);
   }, []);
 
-  // ✅ Submit review
-  const submit = () => {
-    if (!form.name || !form.email || !form.message) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    axios.post(`${API_URL}/add-review`, form)
+  const fetchReviews = () => {
+    axios
+      .get(API_URL)
       .then(res => {
-        setReviews([res.data, ...reviews]);
-        setForm({ name: "", email: "", rating: 5, message: "" });
+        const formatted = res.data.map(item => ({
+          name: item.Name,
+          rating: Number(item.Rating),
+          message: item.Message
+        }));
+
+        setReviews(formatted.reverse());
       })
-      .catch(err => console.error("Submit error:", err));
+      .catch(err => console.error("Fetch error:", err));
   };
-
+  
   return (
-    <section className="section reviews" id="reviews">
-      <h2>Client Reviews</h2>
+  <section className="reviews-section" id="reviews">
+    <h2 className="reviews-title">What Our Clients Say</h2>
 
-      <div className="reviews-main">
+    <div className="reviews-grid">
+      {[...staticReviews, ...reviews]
+        .filter(r => r.name && r.message)
+        .map((r, i) => (
+          <div className="review-card-google" key={i}>
 
-        {/* LEFT SIDE */}
-        <div className="reviews-left">
-          <h3>Top Reviews</h3>
-          {staticReviews.map((r, i) => (
-            <div className="review-card" key={i}>
-              <div className="review-top">
-                <span className="stars">{"⭐".repeat(r.rating)}</span>
-                <span className="name">{r.name}</span>
-              </div>
-              <p className="message">{r.message}</p>
+            {/* STARS */}
+            <div className="stars">
+              {"⭐".repeat(r.rating || 5)}
             </div>
-          ))}
-        </div>
 
-        {/* RIGHT SIDE */}
-        <div className="reviews-right">
+            {/* MESSAGE */}
+            <p className="review-text">{r.message}</p>
 
-          {/* FORM */}
-          <div className="review-form-card">
-            <h3>Share Your Experience</h3>
+            {/* USER */}
+            <h4 className="review-name">{r.name}</h4>
+            <span className="review-location">Chennai</span>
 
-            <input
-              placeholder="Your Name"
-              value={form.name}
-              onChange={e => setForm({ ...form, name: e.target.value })}
+            {/* GOOGLE LOGO */}
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
+              className="google-logo-img"
+              alt="google"
             />
-
-            <input
-              placeholder="Your Email"
-              value={form.email}
-              onChange={e => setForm({ ...form, email: e.target.value })}
-            />
-
-            <select
-              value={form.rating}
-              onChange={e => setForm({ ...form, rating: Number(e.target.value) })}
-            >
-              <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-              <option value="4">⭐⭐⭐⭐ Good</option>
-              <option value="3">⭐⭐⭐ Average</option>
-              <option value="2">⭐⭐ Poor</option>
-              <option value="1">⭐ Bad</option>
-            </select>
-
-            <textarea
-              placeholder="Write your review..."
-              value={form.message}
-              onChange={e => setForm({ ...form, message: e.target.value })}
-            />
-
-            <button className="btn-submit" onClick={submit}>
-              Submit Review
-            </button>
           </div>
-
-          {/* DYNAMIC REVIEWS */}
-          <div className="reviews-grid">
-            {reviews.map((r, i) => (
-              <div className="review-card" key={i}>
-                <div className="review-top">
-                  <span className="stars">{"⭐".repeat(r.rating)}</span>
-                  <span className="name">{r.name}</span>
-                </div>
-                <p className="message">{r.message}</p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
+        ))}
+    </div>
+  </section>
+);
 }
 
 export default Reviews;

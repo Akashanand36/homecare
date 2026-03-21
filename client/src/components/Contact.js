@@ -9,28 +9,53 @@ function Contact() {
       <div className="contact-container">
 
         {/* LEFT SIDE */}
-        <div className="contact-left">
-          <h3>Get in Touch</h3>
+       <div className="contact-left">
+  <h3>Get in Touch</h3>
 
-          <p>
-            <FaMapMarkerAlt className="icon" />
-            <strong> Address:</strong><br/>
-            123 Homecare Street,<br/>
-            Chennai, Tamil Nadu
-          </p>
+  {/* ADDRESS */}
+  <div className="contact-item">
+  <FaMapMarkerAlt className="contact-icon" />
+  <div>
+    <h4>Address</h4>
+    <p>
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=123+Homecare+Street+Chennai"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        123 Homecare Street,<br />
+        Chennai, Tamil Nadu
+      </a>
+    </p>
+  </div>
+</div>
 
-          <p>
-            <FaPhoneAlt className="icon" />
-            <strong> Phone:</strong><br/>
-            +91 98765 43210
-          </p>
 
-          <p>
-            <FaEnvelope className="icon" />
-            <strong> Email:</strong><br/>
-            support@homecare.com
-          </p>
-        </div>
+  {/* PHONE */}
+  <div className="contact-item">
+    <FaPhoneAlt className="contact-icon" />
+    <div>
+      <h4>Phone</h4>
+      <p>
+        <a href="tel:+919876543210">+91 98765 43210</a>
+      </p>
+    </div>
+  </div>
+
+  {/* EMAIL */}
+  <div className="contact-item">
+    <FaEnvelope className="contact-icon" />
+    <div>
+      <h4>Email</h4>
+      <p>
+        <a href="mailto:support@homecare.com">
+          support@homecare.com
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+
 
         {/* RIGHT SIDE */}
         <div className="contact-card">

@@ -3,11 +3,11 @@ import React from "react";
 function Home() {
 
   const handleWhatsApp = () => {
-    window.open("https://wa.me/919876543210", "_blank"); // replace with your number
+    window.open("https://wa.me/919840560072", "_blank"); // replace with your number
   };
 
   const handleCall = () => {
-    window.location.href = "tel:+919876543210"; // replace with your number
+    window.location.href = "tel:+919840560072"; // replace with your number
   };
 
   return (

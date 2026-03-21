@@ -37,13 +37,13 @@ function App() {
       <div className="floating-buttons">
 
         {/* 📞 CALL */}
-        <a href="tel:+919876543210" className="float-btn call-btn">
+        <a href="tel:+919840560072" className="float-btn call-btn">
           <FaPhoneAlt />
         </a>
 
         {/* 💬 WHATSAPP */}
         <a
-          href="https://wa.me/919876543210"
+          href="https://wa.me/919840560072"
           target="_blank"
           rel="noopener noreferrer"
           className="float-btn whatsapp-btn"

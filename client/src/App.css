@@ -3,6 +3,8 @@
   padding: 0;
   font-family: Arial;
   background: #cfe6fb;
+ padding-bottom: 80px;
+  overflow-x: hidden; 
 }
 
 header {
@@ -538,7 +540,8 @@ header {
   }
 
   .contact-card {
-    width: 100%;
+    width: 90%;
+    margin: auto;
   }
 }
 
@@ -548,15 +551,15 @@ header {
 
 
 @media (max-width: 768px) {
-  .floating-buttons {
-    bottom: 15px;
+   .floating-buttons {
+    bottom: 80px; /* 🔥 move above footer */
     right: 15px;
   }
 
   .float-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
   }
 }
  

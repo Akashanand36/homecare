@@ -17,7 +17,7 @@ function Services() {
           <div className="service-card">
           <FaHeartbeat className="icon" />
           <h3>Myo Care</h3>
-          <p>Muscle therapy & recovery support.</p>
+          <p>Comprehensice care & recovery support.</p>
         </div>
 
         <div className="service-card">
@@ -28,7 +28,7 @@ function Services() {
 
        <div className="service-card">
           <FaUserMd className="icon" />
-          <h3>Doctor Care</h3>
+          <h3>Doctor on call</h3>
           <p>Doctor consultation at home.</p>
         </div>
         

@@ -10,7 +10,7 @@ function Services() {
 
          <div className="service-card">
           <FaBrain className="icon" />
-          <h3>Neuro Care</h3>
+          <h3>Neuro & Artho </h3>
           <p>Advanced neurological treatments.</p>
         </div>
 
